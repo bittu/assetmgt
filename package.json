@@ -1,0 +1,33 @@
+{
+  "name": "assetmgt",
+  "version": "1.0.0",
+  "description": "Asset management using node react and mongodb",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bittu/assetmgt.git"
+  },
+  "keywords": [
+    "node",
+    "react",
+    "mongodb",
+    "express"
+  ],
+  "author": "Sandeep Vemula",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bittu/assetmgt/issues"
+  },
+  "homepage": "https://github.com/bittu/assetmgt#readme",
+  "dependencies": {
+    "async": "^1.5.2",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.10",
+    "morgan": "^1.7.0"
+  }
+}
