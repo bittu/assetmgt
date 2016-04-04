@@ -21,24 +21,19 @@ router.post('/api/employee/:employeeID/desk', employeeDesk.save);
 router.put('/api/employee/:employeeID/desk/:deskID', employeeDesk.update);
 router.delete('/api/employee/:employeeID/desk/:deskID', employeeDesk.delete);
 
-router.get('/api/employee/:employeeID/assets', employeeAsset.get);
-router.post('/api/employee/:employeeID/assets', employeeAsset.save);
-router.put('/api/employee/:employeeID/assets/:assetID', employeeAsset.update);
-router.delete('/api/employee/:employeeID/assets/:assetID', employeeAsset.delete);
+router.get('/api/employee/:employeeID/asset', employeeAsset.get);
+router.post('/api/employee/:employeeID/asset', employeeAsset.save);
+router.put('/api/employee/:employeeID/asset/:assetID', employeeAsset.update);
+router.delete('/api/employee/:employeeID/asset/:assetID', employeeAsset.delete);
 
 /*
  * Routes that can be accessed only by authenticated & authorized users
  */
 
-router.get('/api/admin/employee', employee.employeeCtrl.get);
-router.post('/api/admin/employee', employee.employeeCtrl.save);
-router.put('/api/admin/employee/:employeeID', employee.employeeCtrl.update);
-router.delete('/api/admin/employee/:employeeID', employee.employeeCtrl.delete);
-
-router.get('/api/admin/role', employee.roleCtrl.get);
-router.post('/api/admin/role', employee.roleCtrl.save);
-router.put('/api/admin/role/:roleID', employee.roleCtrl.update);
-router.delete('/api/admin/role/:roleID', employee.roleCtrl.delete);
+router.get('/api/admin/employee', employee.get);
+router.post('/api/admin/employee', employee.save);
+router.put('/api/admin/employee/:employeeID', employee.update);
+router.delete('/api/admin/employee/:employeeID', employee.delete);
 
 router.get('/api/admin/assetType', assets.assetTypeCtrl.get);
 router.post('/api/admin/assetType', assets.assetTypeCtrl.save);

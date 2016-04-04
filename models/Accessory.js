@@ -8,6 +8,9 @@ var AccessorySchema = new Schema({
 		type: String,
 		required: true
 	}
+}, {
+	collection: 'Accessory',
+	timestamps: true
 });
 
 module.exports = mongoose.model('Accessory', AccessorySchema);

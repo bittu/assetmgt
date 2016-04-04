@@ -14,6 +14,9 @@ var EmployeeDeskSchema = new Schema({
         ref: 'Desk',
     	required: true
     }
+}, {
+    collection: 'EmployeeDesk',
+    timestamps: true
 });
 
 module.exports = mongoose.model('EmployeeDesk', EmployeeDeskSchema);

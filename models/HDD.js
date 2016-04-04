@@ -8,6 +8,9 @@ var HDDSchema = new Schema({
 		type: String,
 		required: true
 	}
+}, {
+	collection: 'HDD',
+	timestamps: true
 });
 
 module.exports = mongoose.model('HDD', HDDSchema);

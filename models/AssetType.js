@@ -8,6 +8,9 @@ var AssetTypeSchema = new Schema({
 		type: String,
 		required: true
 	}
+}, {
+	collection: 'AssetType',
+	timestamps: true
 });
 
 module.exports = mongoose.model('AssetType', AssetTypeSchema);

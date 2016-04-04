@@ -8,6 +8,9 @@ var RAMSchema = new Schema({
 		type: String,
 		required: true
 	}
+}, {
+	collection: 'RAM',
+	timestamps: true
 });
 
 module.exports = mongoose.model('RAM', RAMSchema);

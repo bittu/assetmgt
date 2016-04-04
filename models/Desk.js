@@ -8,6 +8,9 @@ var DeskSchema = new Schema({
 		type: String,
 		required: true
 	}
+}, {
+	collection: 'Desk',
+	timestamps: true
 });
 
 module.exports = mongoose.model('Desk', DeskSchema);

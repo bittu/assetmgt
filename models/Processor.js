@@ -8,6 +8,9 @@ var ProcessorSchema = new Schema({
 		type: String,
 		required: true
 	}
+}, {
+	collection: 'Processor',
+	timestamps: true
 });
 
 module.exports = mongoose.model('Processor', ProcessorSchema);

@@ -40,6 +40,9 @@ var EmployeeAssetSchema = new Schema({
     	ref: 'Accessory',
     	required: true
     }]
+}, {
+    collection: 'EmployeeAsset',
+    timestamps: true
 });
 
 module.exports = mongoose.model('EmployeeAsset', EmployeeAssetSchema);

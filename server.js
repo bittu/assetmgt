@@ -14,8 +14,7 @@ var routes = require('./routes');
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
-	console.log('Express server started on port: '+ server);
-  console.log(server)
+	console.log('Express server started on port: '+ app.get('port'));
 });
 
 app.use(logger('dev'));
@@ -27,13 +26,7 @@ app.use(express.static(path.join(__dirname, './public')));
 
 app.use('/', routes);
 
-app.get('*', function (req, res) {
-    res.sendFile('./public/index.html');
-});
-
 // If no route is matched by now, it must be a 404
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+app.use(function(req, res, next){
+  return res.status(404).json({"error": true, "message": "Not found"});
 });

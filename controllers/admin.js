@@ -1,7 +1,6 @@
 var Employee = require('../models/Employee');
 var EmployeeAsset = require('../models/EmployeeAsset');
 var EmployeeDesk = require('../models/EmployeeDesk');
-var Wing = require('../models/Wing');
 var Desk = require('../models/Desk');
 
 var adminCtrl = {
