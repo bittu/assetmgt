@@ -13,3 +13,5 @@ mongoimport --db mytestdb --collection HDD --type csv --headerline --file HDD.cs
 mongoimport --db mytestdb --collection Processor --type csv --headerline --file Processor.csv
 
 mongoimport --db mytestdb --collection RAM --type csv --headerline --file RAM.csv
+
+mongoimport --db mytestdb --collection OSVersion --type csv --headerline --file OSVersion.csv

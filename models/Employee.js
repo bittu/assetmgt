@@ -47,7 +47,7 @@ EmployeeSchema.pre('save', function(next) {
 });
 
 EmployeeSchema.methods.comparePassword = function (Password, callback) {
-    callback(bcrypt.compareSync(Password, this.Password));
+    bcrypt.compare(Password, this.Password, callback);
 };
 
 module.exports = mongoose.model('Employee', EmployeeSchema);

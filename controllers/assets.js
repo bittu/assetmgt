@@ -5,6 +5,7 @@ var RAM = require('../models/RAM');
 var HDD = require('../models/HDD');
 var Accessory = require('../models/Accessory');
 var Desk = require('../models/Desk');
+var OSVersion = require('../models/OSVersion');
 
 var assetTypeCtrl = {
 	get: function(req, res) {
@@ -405,11 +406,69 @@ var deskCtrl = {
 	}
 }
 
+var osVersionCtrl = {
+	get: function(req, res) {
+		OSVersion.find({}, function(err, data) {
+			if(err) {
+				console.log(err);
+				return res.status(500).json({"error": true, "message": err});
+			}
+
+			return res.status(200).json(data);
+		});
+	},
+
+	save: function(req, res) {
+		var osVersion = req.body.payload;
+		new OSVersion(osVersion).save(function(err) {
+			if(err) {
+				console.log(err);
+				return res.status(500).json({"error": true, "message": err});
+			}
+
+			return res.status(200).json({"message": "OSVersion saved"});
+		});
+	},
+
+	update: function(req, res) {
+		var osVersionID = req.params.osVersionID;
+		var osVersion = req.body.payload.OSVersion;
+
+		OSVersion.findById(osVersionID, function(err, data) {
+			if(err) {
+				console.log(err);
+				return res.status(500).json({"error": true, "message": err});
+			}
+			data.OSVersion = osVersion;
+			data.save(function(err) {
+				if(err) {
+					console.log(err);
+					return res.status(500).json({"error": true, "message": err});
+				}
+				return res.status(200).json({"message": "OSVersion updated"});
+			});
+		});
+	},
+
+	delete: function(req, res) {
+		var osVersionID = req.params.osVersionID;
+
+		OSVersion.findById(osVersionID).remove(function(err) {
+			if(err) {
+				console.log(err);
+				return res.status(500).json({"error": true, "message": err});
+			}
+			return res.status(200).json({"message": "OSVersion removed"});
+		});
+	}
+}
+
 module.exports = {	assetTypeCtrl: assetTypeCtrl,
 					assetModelCtrl: assetModelCtrl,
 					processorCtrl: processorCtrl,
 					ramCtrl: ramCtrl,
 					hddCtrl: hddCtrl,
 					accessoryCtrl: accessoryCtrl,
-					deskCtrl: deskCtrl
+					deskCtrl: deskCtrl,
+					osVersionCtrl: osVersionCtrl
 				}

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
  
-//var auth = require('../controllers/auth.js');
+var auth = require('../controllers/auth.js');
 var assets = require('../controllers/assets');
 var employee = require('../controllers/employee');
 var employeeAsset = require('../controllers/employeeAsset');
@@ -10,8 +10,8 @@ var employeeDesk = require('../controllers/employeeDesk');
 /*
  * Routes that can be accessed by any one
  */
-//router.post('/login', auth.login);
-//router.post('/login', auth.logout);
+router.post('/login', auth.login);
+router.post('/logout', auth.logout);
  
 /*
  * Routes that can be accessed only by autheticated users
@@ -69,5 +69,10 @@ router.get('/api/admin/desk', assets.deskCtrl.get);
 router.post('/api/admin/desk', assets.deskCtrl.save);
 router.put('/api/admin/desk/:deskID', assets.deskCtrl.update);
 router.delete('/api/admin/desk/:deskID', assets.deskCtrl.delete);
+
+router.get('/api/admin/osVersion', assets.osVersionCtrl.get);
+router.post('/api/admin/osVersion', assets.osVersionCtrl.save);
+router.put('/api/admin/osVersion/:osVersionID', assets.osVersionCtrl.update);
+router.delete('/api/admin/osVersion/:osVersionID', assets.osVersionCtrl.delete);
  
 module.exports = router;

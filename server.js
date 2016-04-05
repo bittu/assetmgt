@@ -9,7 +9,7 @@ var app = express();
 var db = require('./config/mongodb');
 
 var routes = require('./routes');
-//var validateRequest = require('./controllers/validateRequest');
+var validateRequest = require('./controllers/auth').validate;
 
 app.set('port', process.env.PORT || 3000);
 
@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, './public')));
 
-//app.all('/api/*', [validateRequest]);
+app.all('/api/*', [validateRequest]);
 
 app.use('/', routes);
 
