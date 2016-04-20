@@ -24,12 +24,18 @@
   "homepage": "https://github.com/bittu/assetmgt#readme",
   "dependencies": {
     "async": "^1.5.2",
+    "babelify": "^7.2.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
+    "browserify": "^13.0.0",
     "express": "^4.13.4",
+    "flux": "^2.1.1",
     "jsonwebtoken": "^5.7.0",
     "level": "^1.4.0",
     "mongoose": "^4.4.10",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-router": "^2.3.0"
   }
 }
