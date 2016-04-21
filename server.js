@@ -6,10 +6,10 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var app = express();
-var db = require('./config/mongodb');
+var db = require('./server/config/mongodb');
 
-var routes = require('./routes');
-var validateRequest = require('./controllers/auth').validate;
+var routes = require('./server/routes');
+var validateRequest = require('./server/controllers/auth').validate;
 
 app.set('port', process.env.PORT || 3000);
 

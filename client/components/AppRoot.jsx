@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-class AppRoot extends React.Component {
+class AppRoot extends Component {
 	render() {
 		let itemHTML = <li>Hello React</li>;
 		return <div>

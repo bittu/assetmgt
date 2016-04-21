@@ -24,10 +24,8 @@
   "homepage": "https://github.com/bittu/assetmgt#readme",
   "dependencies": {
     "async": "^1.5.2",
-    "babelify": "^7.2.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
-    "browserify": "^13.0.0",
     "express": "^4.13.4",
     "flux": "^2.1.1",
     "jsonwebtoken": "^5.7.0",
@@ -37,5 +35,20 @@
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-router": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "gulp": "^3.9.1",
+    "gulp-exit": "0.0.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
+    "run-sequence": "^1.1.5",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
   }
 }
