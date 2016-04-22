@@ -16,7 +16,7 @@ var runSequence = require('run-sequence');
 function compile(watch) {
     var bundler = watchify(
         browserify({
-                    entries: './client/app.jsx',
+                    entries: './client/index.jsx',
                     extensions: [' ', '.js', '.jsx'],
                     debug: true
                   }).transform(babel, {

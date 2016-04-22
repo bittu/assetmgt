@@ -1,16 +1,16 @@
 var mongoose = require('mongoose'),
     async = require('async');
-require('./../config/mongodb');
+require('./../server/config/mongodb');
 
-var AssetType = require('../models/AssetType');
-var AssetModel = require('../models/AssetModel');
-var Processor = require('../models/Processor');
-var RAM = require('../models/RAM');
-var HDD = require('../models/HDD');
-var Accessory = require('../models/Accessory');
-var Desk = require('../models/Desk');
-var OSVersion = require('../models/OSVersion');
-var Employee = require('../models/Employee');
+var AssetType = require('../server/models/AssetType');
+var AssetModel = require('../server/models/AssetModel');
+var Processor = require('../server/models/Processor');
+var RAM = require('../server/models/RAM');
+var HDD = require('../server/models/HDD');
+var Accessory = require('../server/models/Accessory');
+var Desk = require('../server/models/Desk');
+var OSVersion = require('../server/models/OSVersion');
+var Employee = require('../server/models/Employee');
 
 
 var accessoryData = [{"Accessory":"Charger"},{"Accessory":"Cable"},{"Accessory":"Earphone"}];

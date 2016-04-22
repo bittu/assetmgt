@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class AppRoot extends Component {
+class UserDashboard extends Component {
 	render() {
 		let itemHTML = <li>Hello React</li>;
 		return <div>
@@ -11,4 +11,4 @@ class AppRoot extends Component {
 	}
 }
 
-export default AppRoot;
+export default UserDashboard;
