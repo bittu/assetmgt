@@ -10,11 +10,6 @@ const history = process.env.NODE_ENV === 'production' ?
   HashLocation :
   HistoryLocation;
 
-let jwt = localStorage.getItem('jwt');
-if (jwt) {
-  LoginActions.loginUser(jwt);
-}
-
 render(<Router history={history}>
                 <Route path='/'>
                     <IndexRoute component={Login} />
