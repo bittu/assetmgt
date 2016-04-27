@@ -20,7 +20,8 @@ function compile(watch) {
                     extensions: [' ', '.js', '.jsx'],
                     debug: true
                   }).transform(babel, {
-                                      presets: ['es2015', 'react']
+                                      presets: ['es2015', 'react'],
+                                      plugins: ['transform-class-properties']
                                     })
         );
 

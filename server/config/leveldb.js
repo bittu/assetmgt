@@ -1,5 +1,5 @@
-var level = require('level');
+var levelup = require('level')
 
 module.exports = {
-    db: level(__dirname + '/db')
+    db: levelup(__dirname + '/db')
 }
