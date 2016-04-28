@@ -5,15 +5,15 @@ var Desk = require('../models/Desk');
 
 var adminCtrl = {
 	defaulters: function(req, res) {
-		Employee.find({}).select('_id').exec(function(err, data) {
+		EmployeeAsset.find({}).select('EmployeeID').exec(function(err, data) {
 			if(err) {
 				console.log(err);
 				return res.status(500).json({"error": true, "message": err});
 			}
-
-			var all = data.map(function(v, i) {return v._id});
-
-			EmployeeAsset.find({EmployeeID: {$nin: all}}, function(err, edata) {
+			
+			var all = data.map(function(v, i) {return v.EmployeeID});
+			
+			Employee.find({_id: {$nin: all}}, function(err, edata) {
 				if(err) {
 					console.log(err);
 					return res.status(500).json({"error": true, "message": err});

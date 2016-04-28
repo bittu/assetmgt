@@ -4,10 +4,10 @@ class UserDashboard extends Component {
 	render() {
 		let itemHTML = <li>Hello React</li>;
 		return <div>
-					<ul>
-						{ itemHTML }
-					</ul>
-				</div>;
+						<ul>
+							{ itemHTML }
+						</ul>
+					</div>;
 	}
 }
 

@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 
-var DB_URL = 'mongodb://localhost/assetmgt';
+var DB_URL = 'mongodb://localhost/rajat';
 
 exports.mongoose = mongoose;
 

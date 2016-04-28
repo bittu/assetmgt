@@ -1,20 +1,19 @@
-import AppDispatcher from '../dispatchers/AppDispatcher.js';
-import {LOGIN_USER, LOGOUT_USER} from '../constants/LoginConstants.js';
-import RouterContainer from '../services/RouterContainer';
+import { dispatch, dispatchAsync } from '../dispatchers/AppDispatcher';
+import ActionTypes from '../constants/ActionTypes';
+import AuthService from '../services/AuthService';
 
 export default {
-	loginUser: (jwt) => {
-		var savedJwt = localStorage.getItem('jwt');
+	loginUser: (userName, password) => {
+		let promise = AuthService.login(userName, password);
 
-		AppDispatcher.dispatch({
-	      	actionType: LOGIN_USER,
-	      	jwt: jwt
-	    });
+		dispatchAsync(promise, {
+			request: ActionTypes.REQUEST_LOGIN_USER,
+      success: ActionTypes.REQUEST_LOGIN_USER_SUCCESS,
+      failure: ActionTypes.REQUEST_LOGIN_USER_ERROR
+		}, { userName, password });
+	},
 
-	    if (savedJwt !== jwt) {
-	    	var nextPath = RouterContainer.get().getCurrentQuery().nextPath || '/';
-	    	RouterContainer.get().transitionTo(nextPath);
-	    	localStorage.setItem('jwt', jwt);
-	    }
-	}
+	logoutUser: () => {
+    dispatch(ActionTypes.LOGOUT_USER);
+  }
 }

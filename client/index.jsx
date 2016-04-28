@@ -11,8 +11,8 @@ const history = process.env.NODE_ENV === 'production' ?
   HistoryLocation;
 
 render(<Router history={history}>
-                <Route path='/'>
-                    <IndexRoute component={Login} />
-                    <Route path='userDashboard' component={UserDashboard} />
-                </Route>
-            </Router>, rootEl);
+          <Route path='/'>
+            <IndexRoute component={Login} />
+            <Route path='userDashboard' component={UserDashboard} />
+          </Route>
+     	 </Router>, rootEl);

@@ -6,6 +6,7 @@ var assets = require('../controllers/assets');
 var employee = require('../controllers/employee');
 var employeeAsset = require('../controllers/employeeAsset');
 var employeeDesk = require('../controllers/employeeDesk');
+var admin = require('../controllers/admin');
 
 /*
  * Routes that can be accessed by any one
@@ -74,5 +75,7 @@ router.get('/api/admin/osVersion', assets.osVersionCtrl.get);
 router.post('/api/admin/osVersion', assets.osVersionCtrl.save);
 router.put('/api/admin/osVersion/:osVersionID', assets.osVersionCtrl.update);
 router.delete('/api/admin/osVersion/:osVersionID', assets.osVersionCtrl.delete);
+
+router.get('/defaulters', admin.defaulters);
  
 module.exports = router;
