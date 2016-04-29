@@ -14,7 +14,7 @@ export default (ComposedComponent) => {
 				//store next path in RouterStore for redirecting after authentication
 				//as opposed to storing in the router itself with:
 				// transition.redirect('/login', {}, {'nextPath' : transition.path});
-				RouterActionCreators.storeRouterTransitionPath(transitionPath);
+				RouterAction.storeRouterTransitionPath(transitionPath);
 
 				//go to login page
 				transition.redirect('/');
@@ -27,6 +27,8 @@ export default (ComposedComponent) => {
 		}
 
 		_getLoginState() {
+			console.log(LoginStore);
+			console.log(LoginStore.user);
 		  return {
 			userLoggedIn: LoginStore.isLoggedIn(),
 			user: LoginStore.user,

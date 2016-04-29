@@ -3,7 +3,6 @@ import LoginStore from '../stores/LoginStore';
 import RouterStore from '../stores/RouterStore';
 import LoginActionCreators from '../actions/LoginActionCreators';
 import { Route, RouteHandler, Link } from 'react-router';
-import router from '../router';
 
 export default class App extends React.Component {
 
@@ -45,9 +44,9 @@ export default class App extends React.Component {
       "nextTransitionPath=", transitionPath);
 
     if(userLoggedInState.userLoggedIn){
-      router.transitionTo(transitionPath);
+      this.props.router.transitionTo(transitionPath);
     }else{
-      router.transitionTo('/login');
+      this.props.router.transitionTo('/login');
     }
   }
 

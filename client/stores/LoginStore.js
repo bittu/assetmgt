@@ -1,11 +1,11 @@
 import ActionTypes from '../constants/ActionTypes';
 import BaseStore from './BaseStore';
-import jwt_decode from 'jwt_decode';
+import jwtDecode from 'jwt-decode';
 
 class LoginStore extends BaseStore {
 	constructor() {
 		super();
-		this.subscribe(() => this.registerActions.bind(this));
+		this.subscribe(() => this._registerToActions.bind(this));
 		this._user = null;
 		this._error = null;
 		this._jwt = null;
@@ -17,9 +17,9 @@ class LoginStore extends BaseStore {
 	_registerToActions(action) {
 		switch(action.type) {
 			case ActionTypes.REQUEST_LOGIN_USER_SUCCESS:
-				this._jwt = acrtion.body.id_token;
+				this._jwt = action.body.id_token;
 				localStorage.setItem('jv_jwt', this._jwt);
-				this._user = jwt_decode(this._jwt);
+				this._user = jwtDecode(this._jwt);
 				this._error = null;
 				this.emitChange();
 				break;
@@ -46,7 +46,7 @@ class LoginStore extends BaseStore {
 		let jwt = localStorage.getItem("jv_jwt");
 		if (jwt) {
 			this._jwt = jwt;
-			this._user = jwt_decode(this._jwt);
+			this._user = jwtDecode(this._jwt);
 			console.log("&*&*&* autologin success")
 		}
 	}
@@ -67,3 +67,5 @@ class LoginStore extends BaseStore {
 		return !!this._user;
 	}
 }
+
+export default new LoginStore();

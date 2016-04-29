@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import AuthenticatedComponent from './AuthenticatedComponent'
 
-class UserDashboard extends Component {
+export default AuthenticatedComponent(class UserDashboard extends Component {
 	render() {
 		let itemHTML = <li>Hello React</li>;
 		return <div>
@@ -9,6 +10,4 @@ class UserDashboard extends Component {
 						</ul>
 					</div>;
 	}
-}
-
-export default UserDashboard;
+});
