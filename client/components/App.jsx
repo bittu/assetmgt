@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginStore from '../stores/LoginStore';
 import RouterStore from '../stores/RouterStore';
-import LoginActionCreators from '../actions/LoginActionCreators';
+import LoginActions from '../actions/LoginActions';
 import { Route, RouteHandler, Link } from 'react-router';
 
 export default class App extends React.Component {
@@ -55,6 +55,7 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log('App render'+this.state.userLoggedIn)
     return (
       <div className="container">
         <nav className="navbar navbar-default">
@@ -70,7 +71,7 @@ export default class App extends React.Component {
 
   logout(e) {
     e.preventDefault();
-    LoginActionCreators.logoutUser();
+    LoginActions.logoutUser();
   }
 
   get headerItems() {
@@ -86,4 +87,5 @@ export default class App extends React.Component {
               </div>
         );
     }
+  }
 }
