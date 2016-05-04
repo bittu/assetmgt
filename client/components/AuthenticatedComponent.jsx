@@ -5,21 +5,6 @@ import RouterAction from '../actions/RouterActions';
 
 export default (ComposedComponent) => {
 	return class AuthenticatedComponent extends Component {
-		static willTransitionTo(transition) {
-			console.log('&*&*&* willTransitionTo for authenticated page. Next transition path:', transition.path, 'logged in:', LoginStore.isLoggedIn());
-			if (!LoginStore.isLoggedIn()) {
-
-				let transitionPath = transition.path;
-
-				//store next path in RouterStore for redirecting after authentication
-				//as opposed to storing in the router itself with:
-				// transition.redirect('/login', {}, {'nextPath' : transition.path});
-				RouterAction.storeRouterTransitionPath(transitionPath);
-
-				//go to login page
-				transition.redirect('/');
-			}
-		}
 
 		constructor() {
 		  super();

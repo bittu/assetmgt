@@ -2,7 +2,7 @@ import React from 'react';
 import LoginStore from '../stores/LoginStore';
 import RouterStore from '../stores/RouterStore';
 import LoginActions from '../actions/LoginActions';
-import { Route, RouteHandler, Link } from 'react-router';
+import { Route, Link } from 'react-router';
 
 export default class App extends React.Component {
 
@@ -46,7 +46,7 @@ export default class App extends React.Component {
     if(userLoggedInState.userLoggedIn){
       this.props.router.transitionTo(transitionPath);
     }else{
-      this.props.router.transitionTo('/login');
+      this.props.router.transitionTo('/');
     }
   }
 
@@ -64,7 +64,7 @@ export default class App extends React.Component {
           </div>
           {this.headerItems}
         </nav>
-        <RouteHandler/>
+        {this.props.children}
       </div>
     );
   }
