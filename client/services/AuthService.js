@@ -1,15 +1,16 @@
 import request from 'request';
 import bluebird from 'bluebird';
 
-import {LOGIN_URL, LOGOUT_URL} from '../constants/AppConstants';
+import URLS from '../constants/AppConstants';
 
 class AuthService {
 
-	login(userName, password) {
+	login(EmployeeID, Password) {
+		let payload = {EmployeeID, Password};
 		return new bluebird( (resolve, reject) => {
 			request.post({
-				url: LOGIN_URL,
-				body: {userName, password},
+				url: URLS.LOGIN_URL,
+				body: {payload},
 				json: true
 			}, (err, response, body) => {
 					if(err){
@@ -18,6 +19,7 @@ class AuthService {
 	        if(response.statusCode >= 400){
 	            return reject(body);
 	        }
+	        body.authorization = response.headers.authorization;
 	        return resolve(body);
 				})
 		});

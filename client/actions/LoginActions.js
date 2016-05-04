@@ -8,8 +8,8 @@ export default {
 
 		dispatchAsync(promise, {
 			request: ActionTypes.REQUEST_LOGIN_USER,
-      success: ActionTypes.REQUEST_LOGIN_USER_SUCCESS,
-      failure: ActionTypes.REQUEST_LOGIN_USER_ERROR
+      		success: ActionTypes.REQUEST_LOGIN_USER_SUCCESS,
+      		failure: ActionTypes.REQUEST_LOGIN_USER_ERROR
 		}, { userName, password });
 	},
 

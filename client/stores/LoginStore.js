@@ -17,7 +17,8 @@ class LoginStore extends BaseStore {
 	_registerToActions(action) {
 		switch(action.type) {
 			case ActionTypes.REQUEST_LOGIN_USER_SUCCESS:
-				this._jwt = action.body.id_token;
+				console.log(action);
+				this._jwt = action.body.authorization;
 				localStorage.setItem('jv_jwt', this._jwt);
 				this._user = jwtDecode(this._jwt);
 				this._error = null;

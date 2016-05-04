@@ -10,20 +10,25 @@ class Login extends Component {
     	username: '',
     	password: ''
     };
+
+    this.login = this.login.bind(this);
+    this.userNameChange = this.userNameChange.bind(this);
+    this.passwordChange = this.passwordChange.bind(this);
   }
 
   //action
   login(e) {
     e.preventDefault();
+    console.log(this.state);
     LoginActions.loginUser(this.state.username, this.state.password);
   }
 
-  userNameChange(e, value) {
- 		this.setState('username', value);
+  userNameChange(e) {
+ 		this.setState({username: e.target.value});
   }
 
-  passwordChange(e, value) {
- 		this.setState('password', value);
+  passwordChange(e) {
+ 		this.setState({password: e.target.value});
   }
 
   render() {

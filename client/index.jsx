@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, useRouterHistory } from 'react-router';
+import { createHashHistory } from 'history';
 
 import App from './components/App';
 import Login from './components/Login';
@@ -21,7 +22,9 @@ function onEnterChange (nextState, replace, callback) {
 				callback();
 			}
 
-render(<Router history={hashHistory}>
+const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })			
+
+render(<Router history={appHistory}>
           <Route path='/' component={App}>
             <IndexRoute component={Login} />
             <Route path='userDashboard' component={UserDashboard} onEnter={onEnterChange}/>

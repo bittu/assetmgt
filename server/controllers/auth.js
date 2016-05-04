@@ -4,13 +4,14 @@ var jwt = require('jsonwebtoken'),
 
 var Employee = require('../models/Employee');
 
-var level// = require('../config/leveldb').db;
+var level = require('../config/leveldb').db;
 
 var TOKEN_EXPIRATION = 60*60,
     GUID_LENGTH = 12
 
 var auth = {
 	login: function(req, res) {
+		console.log(req.body)
 		var employee = req.body.payload;
 
 		if (!employee || !employee.EmployeeID || !employee.Password) {
