@@ -24,6 +24,25 @@ class AuthService {
 				})
 		});
 	}
+
+	logout(authorization) {
+		
+		return new bluebird( (resolve, reject) => {
+			request.post({
+				url: URLS.LOGOUT_URL,
+				headers: {authorization},
+				json: true
+			}, (err, response, body) => {
+					if(err){
+	            return reject(err);
+	        }
+	        if(response.statusCode >= 400){
+	            return reject(body);
+	        }
+	        return resolve(body);
+				})
+		});
+	}
 }
 
 export default new AuthService();

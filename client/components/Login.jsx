@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import LoginActions from '../actions/LoginActions';
+import LoginStore from '../stores/LoginStore';
+import RouterStore from '../stores/RouterStore';
 
 class Login extends Component {
 
@@ -14,6 +16,12 @@ class Login extends Component {
     this.login = this.login.bind(this);
     this.userNameChange = this.userNameChange.bind(this);
     this.passwordChange = this.passwordChange.bind(this);
+  }
+
+  componentDidMount() {
+    if(LoginStore.isLoggedIn()) {
+      this.props.history.push(RouterStore.nextTransitionPath || '/');
+    }
   }
 
   //action

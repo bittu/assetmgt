@@ -15,7 +15,7 @@ function onEnterChange (nextState, replace, callback) {
 				console.log('&*&*&* willTransitionTo for authenticated page. Next transition path:', nextState.location.pathname, 'logged in:', LoginStore.isLoggedIn());
 				if (!LoginStore.isLoggedIn()) {
 					replace({
-				      pathname: '/',
+				      pathname: '/login',
 				      state: { nextPathname: nextState.location.pathname }
 				    })
 				}
@@ -26,7 +26,8 @@ const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 
 render(<Router history={appHistory}>
           <Route path='/' component={App}>
-            <IndexRoute component={Login} />
+            <IndexRoute component={UserDashboard} onEnter={onEnterChange}/>
+            <Route name="login" path="/login" component={Login}/>
             <Route path='userDashboard' component={UserDashboard} onEnter={onEnterChange}/>
           </Route>
      	 </Router>, rootEl);

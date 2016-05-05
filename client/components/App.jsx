@@ -44,9 +44,11 @@ export default class App extends React.Component {
       "nextTransitionPath=", transitionPath);
 
     if(userLoggedInState.userLoggedIn){
-      this.props.router.transitionTo(transitionPath);
+      //this.props.router.transitionTo(transitionPath);
+      this.props.history.push(transitionPath);
     }else{
-      this.props.router.transitionTo('/');
+      //this.props.router.transitionTo('/');
+      this.props.history.push('/login');
     }
   }
 
@@ -71,7 +73,7 @@ export default class App extends React.Component {
 
   logout(e) {
     e.preventDefault();
-    LoginActions.logoutUser();
+    LoginActions.logoutUser(localStorage.getItem('jv_jwt'));
   }
 
   get headerItems() {

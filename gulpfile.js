@@ -1,65 +1,105 @@
+var gulp = require('gulp')
 
-var gulp = require('gulp');
-var sourcemaps = require('gulp-sourcemaps');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
-var exit = require('gulp-exit');
+var browserify = require('browserify')
+var watchify = require('watchify')
+var babelify = require('babelify')
 
-var browserify = require('browserify');
-var babel = require('babelify');
-var watchify = require('watchify');
+var source = require('vinyl-source-stream')
+var buffer = require('vinyl-buffer')
+var merge = require('utils-merge')
 
-var runSequence = require('run-sequence');
+var rename = require('gulp-rename')
+var uglify = require('gulp-uglify')
+var sourcemaps = require('gulp-sourcemaps')
 
-function compile(watch) {
-    var bundler = watchify(
-        browserify({
+
+/* nicer browserify errors */
+var gutil = require('gulp-util')
+var chalk = require('chalk')
+
+function map_error(err) {
+  if (err.fileName) {
+    // regular error
+    gutil.log(chalk.red(err.name)
+      + ': '
+      + chalk.yellow(err.fileName.replace(__dirname + '/src/js/', ''))
+      + ': '
+      + 'Line '
+      + chalk.magenta(err.lineNumber)
+      + ' & '
+      + 'Column '
+      + chalk.magenta(err.columnNumber || err.column)
+      + ': '
+      + chalk.blue(err.description))
+  } else {
+    // browserify error..
+    gutil.log(chalk.red(err.name)
+      + ': '
+      + chalk.yellow(err.message))
+  }
+
+  this.end()
+}
+/* */
+
+gulp.task('watchify', function () {
+  var args = merge(watchify.args, { debug: true })
+  var bundler = watchify(browserify({
                     entries: './client/index.jsx',
-                    extensions: [' ', '.js', '.jsx'],
-                    debug: true
-                  }).transform(babel, {
+                    extensions: [' ', '.js', '.jsx']
+                  }, args)).transform(babelify, {
                                       presets: ['es2015', 'react'],
                                       plugins: ['transform-class-properties', 'transform-object-rest-spread']
                                     })
-        );
+  bundle_js(bundler)
 
-    function rebundle() {
-        return bundler.bundle()
-                .on('error', function(err){
-                    console.log(err);
-                    this.emit('end');
-                })
-                .pipe(source('bundle.js'))
-                .pipe(buffer())
-                .pipe(sourcemaps.init({ loadMaps: true }))
-                .pipe(sourcemaps.write('./'))
-                .pipe(gulp.dest('./public'));
-    }
+  bundler.on('update', function () {
+    bundle_js(bundler)
+  })
+})
 
-    if(watch) {
-        bundler.on('update', function() {
-            console.log('-> bundling...');
-            rebundle();
-        });
-    } else {
-        rebundle().pipe(exit());
-    }
+function bundle_js(bundler) {
+  return bundler.bundle()
+    .on('error', map_error)
+    .pipe(source('bundle.js'))
+    .pipe(buffer())
+    .pipe(gulp.dest('./public'))
+    .pipe(rename('bundle.min.js'))
+    .pipe(sourcemaps.init({ loadMaps: true }))
+      // capture sourcemaps from transforms
+      .pipe(uglify())
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('./public'))
 }
 
-function watch() {
-    return compile(true);
-};
+// Without watchify
+gulp.task('browserify', function () {
+  var bundler = browserify({
+                    entries: './client/index.jsx',
+                    extensions: [' ', '.js', '.jsx']
+                  }, { debug: true }).transform(babelify, {
+                                      presets: ['es2015', 'react'],
+                                      plugins: ['transform-class-properties', 'transform-object-rest-spread']
+                                    })
 
-/*gulp.task('compress', function() {
-  return gulp.src('./public/bundle.js')
+  return bundle_js(bundler)
+})
+
+// Without sourcemaps
+gulp.task('browserify-production', function () {
+  var bundler = browserify({
+                    entries: './client/index.jsx',
+                    extensions: [' ', '.js', '.jsx']
+                  }).transform(babelify, {
+                                      presets: ['es2015', 'react'],
+                                      plugins: ['transform-class-properties', 'transform-object-rest-spread']
+                                    })
+
+  return bundler.bundle()
+    .on('error', map_error)
+    .pipe(source('bundle.js'))
+    .pipe(buffer())
+    .pipe(rename('bundle.min.js'))
     .pipe(uglify())
-    .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('public'));
-});*/
-
-gulp.task('build', function() { return compile(); });
-gulp.task('watch', function() { return watch(); });
-
-gulp.task('default', ['watch']);
+    .pipe(gulp.dest('./public'))
+})

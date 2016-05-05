@@ -14,6 +14,6 @@ export default {
 	},
 
 	logoutUser: () => {
-    dispatch(ActionTypes.LOGOUT_USER);
-  }
+    	dispatch(ActionTypes.LOGOUT_USER);
+  	}
 }
