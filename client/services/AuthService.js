@@ -19,8 +19,7 @@ class AuthService {
 	        if(response.statusCode >= 400){
 	            return reject(body);
 	        }
-	        body.authorization = response.headers.authorization;
-	        return resolve(body);
+	        return resolve(response.headers);
 				})
 		});
 	}

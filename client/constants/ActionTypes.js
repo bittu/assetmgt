@@ -1,11 +1,11 @@
 import keyMirror from 'keymirror';
 
 export default keyMirror({
-  REQUEST_LOGIN_USER: null,
-  REQUEST_LOGIN_USER_SUCCESS: null,
-  REQUEST_LOGIN_USER_ERROR: null,
+  REQUEST_LOGIN: null,
+  REQUEST_LOGIN_SUCCESS: null,
+  REQUEST_LOGIN_ERROR: null,
 
-  LOGOUT_USER: null,
+  LOGOUT: null,
 
   APP_CONTROLLER_COMPONENT_MOUNTED: null,
   APP_CONTROLLER_COMPONENT_UNMOUNTED: null,

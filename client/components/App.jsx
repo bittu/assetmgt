@@ -1,8 +1,10 @@
 import React from 'react';
 import LoginStore from '../stores/LoginStore';
 import RouterStore from '../stores/RouterStore';
-import LoginActions from '../actions/LoginActions';
 import { Route, Link } from 'react-router';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
+import Header from './Header';
 
 export default class App extends React.Component {
 
@@ -16,11 +18,12 @@ export default class App extends React.Component {
 
   _getLoginState() {
     return {
-      userLoggedIn: LoginStore.isLoggedIn()
+      employeeLoggedIn: LoginStore.isLoggedIn(),
+      employee: LoginStore.employee
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     //register change listener with LoginStore
     this.changeListener = this._onLoginChange.bind(this);
     LoginStore.addChangeListener(this.changeListener);
@@ -33,18 +36,19 @@ export default class App extends React.Component {
   _onLoginChange() {
     //get a local up-to-date record of the logged-in state
     //see https://facebook.github.io/react/docs/component-api.html
-    let userLoggedInState = this._getLoginState();
-    this.setState(userLoggedInState);
+    let employeeLoggedInState = this._getLoginState();
+    this.setState(employeeLoggedInState);
 
     //get any nextTransitionPath - NB it can only be got once then it self-nullifies
     let transitionPath = RouterStore.nextTransitionPath || '/';
 
     //trigger router change
-    console.log("&*&*&* App onLoginChange event: loggedIn=", userLoggedInState.userLoggedIn,
+    console.log("&*&*&* App onLoginChange event: loggedIn=", employeeLoggedInState.userLoggedIn,
       "nextTransitionPath=", transitionPath);
 
-    if(userLoggedInState.userLoggedIn){
+    if(employeeLoggedInState.employeeLoggedIn){
       //this.props.router.transitionTo(transitionPath);
+      this.setState({employee: LoginStore.employee});
       this.props.history.push(transitionPath);
     }else{
       //this.props.router.transitionTo('/');
@@ -57,37 +61,20 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log('App render'+this.state.userLoggedIn)
+    console.log('App render '+this.state)
     return (
-      <div className="container">
-        <nav className="navbar navbar-default">
-          <div className="navbar-header">
-            <a className="navbar-brand" href="/">React Flux app with JWT authentication innit</a>
-          </div>
-          {this.headerItems}
-        </nav>
+      <div>
+        <Header employeeLoggedIn={this.state.employeeLoggedIn} employee={this.state.employee} />
+        <ReactCSSTransitionGroup
+          component="div"
+          transitionName="example"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+      >
         {this.props.children}
+      </ReactCSSTransitionGroup>
       </div>
     );
   }
 
-  logout(e) {
-    e.preventDefault();
-    LoginActions.logoutUser(localStorage.getItem('jv_jwt'));
-  }
-
-  get headerItems() {
-    if (!this.state.userLoggedIn) {
-      return (<div>
-                <h1>Header</h1>
-              </div>
-        );
-    } else {
-      return (<div>
-                <h1>Header</h1>
-                <a href="" onClick={this.logout}>Logout</a>
-              </div>
-        );
-    }
-  }
 }

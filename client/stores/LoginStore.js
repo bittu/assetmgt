@@ -6,7 +6,7 @@ class LoginStore extends BaseStore {
 	constructor() {
 		super();
 		this.subscribe(() => this._registerToActions.bind(this));
-		this._user = null;
+		this._employee = null;
 		this._error = null;
 		this._jwt = null;
 
@@ -16,22 +16,22 @@ class LoginStore extends BaseStore {
 
 	_registerToActions(action) {
 		switch(action.type) {
-			case ActionTypes.REQUEST_LOGIN_USER_SUCCESS:
+			case ActionTypes.REQUEST_LOGIN_SUCCESS:
 				console.log(action);
 				this._jwt = action.body.authorization;
 				localStorage.setItem('jv_jwt', this._jwt);
-				this._user = jwtDecode(this._jwt);
+				this._employee = jwtDecode(this._jwt).employee;
 				this._error = null;
 				this.emitChange();
 				break;
 			
-			case ActionTypes.REQUEST_LOGIN_USER_ERROR:
+			case ActionTypes.REQUEST_LOGIN_ERROR:
 				this._error = action.error;
 				this.emitChange();
 				break;
 
-			case ActionTypes.LOGOUT_USER:
-				this._user = null;
+			case ActionTypes.LOGOUT:
+				this._employee = null;
 				this._error = null;
 				this._jwt = null;
 				localStorage.setItem("jv_jwt", "");
@@ -47,13 +47,14 @@ class LoginStore extends BaseStore {
 		let jwt = localStorage.getItem("jv_jwt");
 		if (jwt) {
 			this._jwt = jwt;
-			this._user = jwtDecode(this._jwt);
+			this._employee = jwtDecode(this._jwt).employee;
+			this.emitChange();
 			console.log("&*&*&* autologin success")
 		}
 	}
 
-	get user() {
-		return this._user;
+	get employee() {
+		return this._employee;
 	}
 
 	get error() {
@@ -65,7 +66,7 @@ class LoginStore extends BaseStore {
 	}
 
 	isLoggedIn() {
-		return !!this._user;
+		return !!this._employee;
 	}
 }
 
