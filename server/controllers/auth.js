@@ -35,7 +35,7 @@ var auth = {
 				}
 				if(!isAuthenticate) {
 					console.log("Attempt failed to login with " + employee.EmployeeID);
-					return res.status(401).json({"error": true, "message": "Invalid credentials"});
+					return res.status(200).json({"error": true, "message": "Invalid credentials"});
 				}
 				
 				data = data.toObject();

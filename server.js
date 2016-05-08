@@ -23,6 +23,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, './public')));
 app.use(express.static(path.join(__dirname, './node_modules/materialize-css/bin')));
 app.use(express.static(path.join(__dirname, './node_modules/jquery/dist')));
+app.use(express.static(path.join(__dirname, './node_modules/material-design-icons/iconfont')));
 
 app.all('/api/*', [validateRequest]);
 

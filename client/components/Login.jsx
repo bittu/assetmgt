@@ -6,6 +6,8 @@ import RouterStore from '../stores/RouterStore';
 
 import { Card, Row, Col, Input, Button, Icon } from 'react-materialize';
 
+import NumberInput from './shared/NumberInput';
+
 <Button type='submit' waves='light'>Submit<Icon right>send</Icon></Button>;
 
 class Login extends Component {
@@ -13,12 +15,12 @@ class Login extends Component {
 	constructor() {
     super();
     this.state = {
-    	username: '',
-    	password: ''
+    	EmployeeID: '',
+    	Password: ''
     };
 
     this.login = this.login.bind(this);
-    this.userNameChange = this.userNameChange.bind(this);
+    this.employeeIDChange = this.employeeIDChange.bind(this);
     this.passwordChange = this.passwordChange.bind(this);
   }
 
@@ -31,22 +33,24 @@ class Login extends Component {
     if(LoginStore.isLoggedIn()) {
       this.props.history.push(RouterStore.nextTransitionPath || '/');
     }
-    $('.loginCard').addClass('shown');
   }
 
-  //action
   login(e) {
     e.preventDefault();
     console.log(this.state);
-    LoginActions.login(this.state.username, this.state.password);
+    if(!this.state.EmployeeID || !this.state.Password) {
+      this.state.errorMessage = 'Please fill all fields';
+      return;
+    }
+    LoginActions.login(this.state.EmployeeID, this.state.Password);
   }
 
-  userNameChange(e) {
- 		this.setState({username: e.target.value});
+  employeeIDChange(val) {
+ 		this.setState({EmployeeID: val});
   }
 
   passwordChange(e) {
- 		this.setState({password: e.target.value});
+    this.setState({Password: e.target.value});
   }
 
   render() {
@@ -55,11 +59,11 @@ class Login extends Component {
       <Row>
         <Col s={4} offset='s4'>
           <Card title='Login' className='loginCard'>
-            <form role="form">
+            <form role="form" onSubmit={this.login}>
               <Row>
-                <Input s={12} label="EmployeeID" value={this.state.username} onChange={this.userNameChange}/>
-                <Input type="password" label="Password" s={12} value={this.state.password} onChange={this.passwordChange}/>
-                <Button type="submit" waves='light' onClick={this.login.bind(this)}>Submit<Icon right>send</Icon></Button>
+                <NumberInput col={12} label="EmployeeID" inputValue={this.state.EmployeeID} onChange={this.employeeIDChange} maxlength={7}/>
+                <Input type="password" label="Password" s={12} value={this.state.Password} onChange={this.passwordChange}/>
+                <Button type="submit" waves='light'>Submit<Icon right>send</Icon></Button>
               </Row>
             </form>
           </Card>
