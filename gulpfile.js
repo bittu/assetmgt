@@ -42,7 +42,7 @@ function map_error(err) {
 }
 /* */
 
-gulp.task('watchify', function () {
+gulp.task('watch', function () {
   var args = merge(watchify.args, { debug: true })
   var bundler = watchify(browserify({
                     entries: './client/index.jsx',
@@ -75,7 +75,7 @@ function bundle_js(bundler) {
 }
 
 // Without watchify
-gulp.task('browserify', function () {
+gulp.task('build', function () {
   var bundler = browserify({
                     entries: './client/index.jsx',
                     extensions: [' ', '.js', '.jsx']
@@ -88,7 +88,7 @@ gulp.task('browserify', function () {
 })
 
 // Without sourcemaps
-gulp.task('browserify-production', function () {
+gulp.task('build-prod', function () {
   var bundler = browserify({
                     entries: './client/index.jsx',
                     extensions: [' ', '.js', '.jsx']
