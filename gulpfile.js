@@ -54,8 +54,10 @@ gulp.task('watchify', function () {
   bundle_js(bundler)
 
   bundler.on('update', function () {
+    gutil.log(chalk.blue('re-building...'));
     bundle_js(bundler)
   })
+  bundler.on('log', gutil.log);
 })
 
 function bundle_js(bundler) {

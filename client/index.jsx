@@ -10,8 +10,6 @@ import UserDashboard from './components/UserDashboard';
 import LoginStore from './stores/LoginStore';
 import RouterActions from './actions/RouterActions';
 
-const rootEl = document.getElementById('app');
-
 function onEnterChange (nextState, replace, callback) {
 				console.log('&*&*&* willTransitionTo for authenticated page. Next transition path:', nextState.location.pathname, 'logged in:', LoginStore.isLoggedIn());
 				if (!LoginStore.isLoggedIn()) {
@@ -31,4 +29,4 @@ render(<Router history={appHistory}>
             <IndexRoute component={UserDashboard} onEnter={onEnterChange}/>
             <Route name="login" path="/login" component={Login}/>
           </Route>
-     	 </Router>, rootEl);
+     	 </Router>, document.getElementById('app'));
