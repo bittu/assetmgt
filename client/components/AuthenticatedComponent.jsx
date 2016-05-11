@@ -13,10 +13,10 @@ export default (ComposedComponent) => {
 
 		_getLoginState() {
 			console.log(LoginStore);
-			console.log(LoginStore.user);
+			console.log(LoginStore.employee);
 		  return {
-			userLoggedIn: LoginStore.isLoggedIn(),
-			user: LoginStore.user,
+			employeeLoggedIn: LoginStore.isLoggedIn(),
+			employee: LoginStore.employee,
 			jwt: LoginStore.jwt
 		  };
 		}
@@ -38,9 +38,9 @@ export default (ComposedComponent) => {
 			return (
       <ComposedComponent
         {...this.props}
-        user={this.state.user}
+        employee={this.state.employee}
         jwt={this.state.jwt}
-        userLoggedIn={this.state.userLoggedIn} />
+        employeeLoggedIn={this.state.employeeLoggedIn} />
       );
 		}
 	}
